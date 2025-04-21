@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: askmydocs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: askmydocs
+  template:
+    metadata:
+      labels:
+        app: askmydocs
+    spec:
+      containers:
+      - name: askmydocs
+        image: askmydocs:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8501
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-secret
+              key: api_key
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: askmydocs-service
+spec:
+  selector:
+    app: askmydocs
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8501
+  type: ClusterIP
