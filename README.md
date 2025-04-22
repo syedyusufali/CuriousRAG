@@ -42,8 +42,8 @@ askmydocs/
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/yourname/askmydocs.git
-cd askmydocs
+git clone https://github.com/yourname/curiousrag.git
+cd curiousrag
 
 # 2. Place .txt/.pdf/.md files into data/
 mkdir -p data
@@ -71,8 +71,8 @@ export OPENAI_API_KEY=your-api-key
 ## 🐳 Docker Usage
 
 ```bash
-docker build -t askmydocs .
-docker run -p 8501:8501 -e OPENAI_API_KEY=your-api-key askmydocs
+docker build -t curiousrag .
+docker run -p 8501:8501 -e OPENAI_API_KEY=your-api-key curiousrag
 ```
 
 ---
@@ -87,10 +87,10 @@ minikube start
 kubectl apply -f k8s/openai-secret.yaml
 
 # Deploy app
-kubectl apply -f k8s/askmydocs-deployment.yaml
+kubectl apply -f k8s/deployment.yaml
 
 # Port forward to access app
-kubectl port-forward service/askmydocs-service 8501:80
+kubectl port-forward service/curious-service 8501:80
 ```
 
 Visit: `http://localhost:8501`
